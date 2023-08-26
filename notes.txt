@@ -1,0 +1,5 @@
+Measure-Command { aplicação } 
+- Ex: Measure-Command { dir } 
+
+Measure-Command { aplicação | Out-Default } 
+- Ex: Measure-Command { dir | Out-Default } 
