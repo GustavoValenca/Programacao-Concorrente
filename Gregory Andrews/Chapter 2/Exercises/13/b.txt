@@ -1,0 +1,36 @@
+Initial values:
+X == 2;
+Y == 5;
+
+S1: X = X + Y;
+S2: Y = X - Y;    
+S3: X = X - Y;    
+
+----------------
+
+b) 
+    Neste caso, teremos uma permutação, com 6 possibilidades de ordem de execução:
+    - S1; S2; S3;    # Final results: X == 5 e Y == 2
+        # X == 7
+        # Y == 2
+        # X == 5
+    - S1; S3; S2;    # Final results: X == 2 e Y == -3
+        # X == 7
+        # X == 2
+        # Y == -3
+    - S2; S1; S3;    # Final results: X == 2 e Y == -3
+        # Y == -3
+        # X == -1
+        # X == 2
+    - S2; S3; S1;    # Final results: X == 2 e Y == -3
+        # Y == -3
+        # X == 5
+        # X == 2
+    - S3; S1; S2;    # Final results: X == -1 e Y == -6
+        # X == -3
+        # X == -1
+        # Y == -6
+    - S3; S2; S1;    # Final results: X == -11 e Y == -8
+        # X == -3
+        # Y == -8
+        # X == -11

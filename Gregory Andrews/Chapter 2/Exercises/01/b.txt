@@ -1,0 +1,28 @@
+string buffer;    # contains one line of input
+bool done = false;    # used to signal termination 
+bool full = false;    # signals buffer fullness
+
+co    # process 1: find patterns
+    string line1;
+    while (true){
+        # wait for buffer to be full or done to be true;
+        < await (full == true or done == true); >
+        if (done) break;
+        line1 = buffer;
+        # signal that buffer is empty;
+        full = false; 
+        look for pattern in line1;
+        if (pattern is in line1)
+            write line1; 
+    }
+//    # process 2: read new lines
+    string line2;
+    while (true) {
+        read next line of input into line2;
+        if (EOF) {done = true; break;}
+        # wait for buffer to be empty;
+        < await (full == false); >
+        buffer = line2;
+        # signal that buffer is full;
+        full = true; 
+    }

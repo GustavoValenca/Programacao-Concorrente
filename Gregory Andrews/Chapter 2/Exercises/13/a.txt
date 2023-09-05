@@ -1,0 +1,14 @@
+Initial values:
+X == 2;
+Y == 5;
+
+S1: X = X + Y;    # X == 7
+S2: Y = X - Y;    # Y == 2
+S3: X = X - Y;    # X == 5
+
+----------------
+
+a) 
+    As operações são executadas sequencialmente, de forma que
+    os valores finais de X e Y serão 5 e 2, respectivamente
+    (X == 5 e Y == 2).

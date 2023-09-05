@@ -1,0 +1,8 @@
+Initial values:
+X == 2;
+Y == 5;
+
+S1: X = X + Y;
+S2: Y = X - Y;
+S3: X = X - Y;
+
