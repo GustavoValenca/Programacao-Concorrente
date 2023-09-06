@@ -6,4 +6,14 @@ oc
 ----------------------------
 
 b)
-    
+    Pode ser que o programa não termine. 
+    Suponha que após algumas execuções, o estado atual é o seguinte: X == 9 e Y == 10.
+        Suponha que o while do primeiro processo seja escalonado.
+        A condição será verdade, logo a operação dentro do loop pode ser elegível.
+        Porém, suponha que agora o while do segundo processo seja escalonado.
+        A condição será verdade, logo a operação dentro do loop desse segundo processo
+        pode ser elegível. Caso seja escalonada a operação do segundo processo, a condição
+        será invalidada, pois Y terá o valor 9, ou seja, o programa deveria encerrar. Porém, 
+        como ainda precisamos executar a operação do primeiro processo, X terá valor 10, 
+        e assim a condição volta a ser verdade. Como O X sempre aumenta e o Y sempre diminui, 
+        não será alcançado o estado em que os dois têm valor igual. Logo o programa não vai terminar. 

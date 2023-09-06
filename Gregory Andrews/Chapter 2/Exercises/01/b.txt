@@ -1,28 +1,76 @@
 string buffer;    # contains one line of input
-bool done = false;    # used to signal termination 
-bool full = false;    # signals buffer fullness
+bool done1 = false;    # used to signal termination of file 1
+bool done2 = false; 
+bool full1 = false;    # signals buffer fullness
+bool full2 = false;
+bool ostream = false;
+string tmp;
 
-co    # process 1: find patterns
+co    # process 1: find patterns in file 1
     string line1;
     while (true){
         # wait for buffer to be full or done to be true;
-        < await (full == true or done == true); >
-        if (done) break;
+        < await (full1 == true or done1 == true); >
+        if (done1) break;
         line1 = buffer;
         # signal that buffer is empty;
-        full = false; 
+        full1 = false; 
         look for pattern in line1;
         if (pattern is in line1)
-            write line1; 
+            # wait for ostream to be empty
+            < await ostream == false;
+
+            # signal that output stream is being used
+            tmp = line1;
+            ostream = true; >
     }
-//    # process 2: read new lines
+//    # process 2: read new lines from file 1
     string line2;
     while (true) {
         read next line of input into line2;
-        if (EOF) {done = true; break;}
+        if (EOF) {done1 = true; break;}
         # wait for buffer to be empty;
-        < await (full == false); >
-        buffer = line2;
+        < await (full1 == false && full2 == false);
         # signal that buffer is full;
-        full = true; 
+        full1 = true; > 
+        buffer = line2;
+    }
+// # process 3: find patterns in file 2
+    string line3;
+    while (true){
+        # wait for buffer to be full or done to be true;
+        < await (full2 == true or done2 == true); >
+        if (done2) break;
+        line3 = buffer;
+        # signal that buffer is empty;
+        full2 = false; 
+        look for pattern in line3;
+        if (pattern is in line3)
+            # wait for ostream to be empty
+            < await ostream == false;
+
+            # signal that output stream is being used
+            tmp = line3; 
+            ostream = true; >
+
+    }
+//    # process 4: read new lines from file 2
+    string line4;
+    while (true) {
+        read next line of input into line4;
+        if (EOF) {done2 = true; break;}
+        # wait for buffer to be empty;
+        < await (full1 == false && full2 == false);
+        # signal that buffer is full;
+        full2 = true; >
+
+        buffer = line4;
+    }
+
+//  # process 5: write lines
+    while (true) {
+        <await (done1 == false && done2 == false) || ostream = true >
+        if (done1 == false && done2 == false) break;
+        write tmp;
+        ostream = false;
     }

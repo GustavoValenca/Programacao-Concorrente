@@ -1,0 +1,12 @@
+co < await (x > 0) x = x - 1; >
+// < await (x < 0) x = x + 2; >
+// < await (x == 0) x = x - 1; >
+oc
+
+--------------------------------
+
+Para os valores -1, 0 e 1 o programa terminará.
+
+Iniciando com X = -1, o estado final será X = -1.
+Iniciando com X = 0, o estado final será X = 0.
+Iniciando com X = 1, o estado final será X = 1.
